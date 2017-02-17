@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6839107593fdd9046a8f9e92c11a9cb6
-timeCreated: 1487314420
+timeCreated: 1487347558
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -149,6 +149,7 @@ TextureImporter:
     21300284: Mario_Jump
     21300286: goomba_1
     21300288: goomba_3
+    21300290: mario_death
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -352,6 +353,19 @@ TextureImporter:
         y: 678
         width: 32
         height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_death
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 438
+        width: 32
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

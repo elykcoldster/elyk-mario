@@ -25,26 +25,34 @@ public class MarioController : MonoBehaviour {
 
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground");
 		grounded = true;
+
+		sr.sortingOrder = 32767;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Move ();
-		Jump ();
+		if (!Global.instance.death) {
+			Move ();
+			Jump ();
+		} else {
+			anim.SetBool ("death", true);
+		}
 	}
 
 	void FixedUpdate() {
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
-		if (grounded) {
-			anim.SetBool ("jump", false);
-		} else {
-			anim.SetBool ("jump", true);
-		}
+		if (!Global.instance.death) {
+			grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
+			if (grounded) {
+				anim.SetBool ("jump", false);
+			} else {
+				anim.SetBool ("jump", true);
+			}
+		}	
 	}
 
 	void OnCollisionEnter2D(Collision2D c) {
 		if (c.gameObject.tag == "Enemy") {
-			rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
+			// rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
 		}
 	}
 
@@ -58,7 +66,40 @@ public class MarioController : MonoBehaviour {
 
 	void Jump() {
 		if (Input.GetButtonDown ("Jump") && grounded) {
-			rb.AddForce (Vector2.up * jumpHeight, ForceMode2D.Impulse);
+			Bounce (jumpHeight);
+			Global.instance.JumpAudio (false);
 		}
+	}
+
+	IEnumerator DeathAnimation(float t, bool bounce) {
+		yield return new WaitForSeconds (t);
+		if (bounce) {
+			Bounce (2.5f);
+		}
+		transform.GetComponent<Collider2D> ().enabled = false;
+		yield return new WaitForSeconds (Global.instance.deathAudio.length);
+		Global.instance.ResetPosition ();
+	}
+
+	public void Bounce() {
+		rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
+	}
+
+	public void Bounce(float height) {
+		rb.AddForce (Vector2.up * height, ForceMode2D.Impulse);
+	}
+
+	public void Revive() {
+		anim.SetBool ("death", false);
+		transform.GetComponent<Collider2D> ().enabled = true;
+		rb.velocity = Vector2.zero;
+	}
+
+	public void Die(bool bounce) {
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		anim.SetBool ("death", true);
+		StartCoroutine (DeathAnimation (0.1f, bounce));
+		Global.instance.DeathAudio ();
+		Global.instance.death = true;
 	}
 }
