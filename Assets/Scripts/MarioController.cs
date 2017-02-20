@@ -65,7 +65,7 @@ public class MarioController : MonoBehaviour {
 	}
 
 	void Jump() {
-		if (Input.GetButtonDown ("Jump") && grounded) {
+		if ((Input.GetButtonDown ("Jump") || Input.GetButtonDown("Up"))&& grounded) {
 			Bounce (jumpHeight);
 			Global.instance.JumpAudio (false);
 		}
