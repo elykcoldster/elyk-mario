@@ -7,15 +7,16 @@ public class MarioController : MonoBehaviour {
 	public float speed = 3.0f;
 	public float jumpHeight = 3.0f;
 	public float bounceHeight = 2.0f;
-	public Transform groundCheck;
-	public float groundCheckRadius = 0.1f;
+	public Transform groundCheck, headCheck;
 
 	Animator anim;
 	SpriteRenderer sr;
 	Rigidbody2D rb;
 
 	int groundLayer;
+	float width;
 	bool grounded;
+	bool hit;
 
 	// Use this for initialization
 	void Start () {
@@ -23,10 +24,12 @@ public class MarioController : MonoBehaviour {
 		sr = GetComponent<SpriteRenderer> ();
 		rb = GetComponent<Rigidbody2D> ();
 
-		groundLayer = 1 << LayerMask.NameToLayer ("Ground");
+		groundLayer = 1 << LayerMask.NameToLayer ("Ground") | 1 << LayerMask.NameToLayer("Block");
 		grounded = true;
 
 		sr.sortingOrder = 32767;
+
+		width = sr.bounds.size.x;
 	}
 	
 	// Update is called once per frame
@@ -41,7 +44,7 @@ public class MarioController : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (!Global.instance.death) {
-			grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
+			grounded = Physics2D.OverlapBox (groundCheck.position, new Vector2(width, 0.01f), 0.0f, groundLayer);
 			if (grounded) {
 				anim.SetBool ("jump", false);
 			} else {
@@ -51,9 +54,17 @@ public class MarioController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D c) {
-		if (c.gameObject.tag == "Enemy") {
-			// rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
+		int blockLayer = 1 << LayerMask.NameToLayer ("Block");
+		if (Physics2D.OverlapBox (headCheck.position, new Vector2 (width, 0.01f), 0.0f, blockLayer)) {
+			if (!hit) {
+				print (c.collider);
+				hit = true;
+			}
 		}
+	}
+
+	void OnCollisionExit2D(Collision2D c) {
+		hit = false;
 	}
 
 	void Move() {
@@ -98,6 +109,7 @@ public class MarioController : MonoBehaviour {
 	public void Die(bool bounce) {
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		anim.SetBool ("death", true);
+		anim.SetBool ("jump", false);
 		StartCoroutine (DeathAnimation (0.1f, bounce));
 		Global.instance.DeathAudio ();
 		Global.instance.death = true;

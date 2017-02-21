@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 056e4303a7fdf2649bb6c068d0f6e565
-timeCreated: 1487298441
+timeCreated: 1487645322
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: tile_1
+    21300002: block_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -75,6 +76,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: block_1
+      rect:
+        serializedVersion: 2
+        x: 16
         y: 432
         width: 16
         height: 16

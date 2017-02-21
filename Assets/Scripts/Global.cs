@@ -12,7 +12,7 @@ public class Global : MonoBehaviour {
 	public GameObject tile;
 	public Vector2 startingPosition = Vector2.zero;
 
-	public AudioClip deathAudio, stomp, smallJump, superJump;
+	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock;
 
 	public bool death = false;
 
@@ -39,6 +39,11 @@ public class Global : MonoBehaviour {
 		}
 	}
 
+	void AudioPlay(AudioClip a) {
+		audioSource.clip = a;
+		audioSource.Play ();
+	}
+
 	public void ResetPosition() {
 		death = false;
 		player.position = startingPosition;
@@ -46,17 +51,18 @@ public class Global : MonoBehaviour {
 	}
 
 	public void JumpAudio(bool jumpType) {
-		audioSource.clip = jumpType ? superJump : smallJump;
-		audioSource.Play ();
+		AudioPlay (jumpType ? superJump : smallJump);
 	}
 
 	public void StompAudio() {
-		audioSource.clip = stomp;
-		audioSource.Play ();
+		AudioPlay (stomp);
 	}
 
 	public void DeathAudio() {
-		audioSource.clip = deathAudio;
-		audioSource.Play ();
+		AudioPlay (deathAudio);
+	}
+
+	public void BumpAudio() {
+		AudioPlay (bump);
 	}
 }
