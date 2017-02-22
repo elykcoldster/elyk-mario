@@ -1,11 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraFollow.cs">
     <Files>
       <File FileName="Assets\Scripts\Enemy.cs" Line="9" Column="2" />
-      <File FileName="Assets\Scripts\Global.cs" Line="28" Column="14" />
-      <File FileName="Assets\Scripts\MarioController.cs" Line="19" Column="2" />
+      <File FileName="Assets\Scripts\Global.cs" Line="26" Column="25" />
+      <File FileName="Assets\Scripts\MarioController.cs" Line="11" Column="20" />
       <File FileName="Assets\Scripts\FallDeath.cs" Line="14" Column="36" />
+      <File FileName="Assets\Scripts\Block.cs" Line="10" Column="12" />
+      <File FileName="Assets\Scripts\ItemBlock.cs" Line="30" Column="24" />
+      <File FileName="Assets\Scripts\Coin.cs" Line="7" Column="1" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="21" Column="103" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

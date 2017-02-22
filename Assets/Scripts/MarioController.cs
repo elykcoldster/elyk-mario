@@ -8,15 +8,16 @@ public class MarioController : MonoBehaviour {
 	public float jumpHeight = 3.0f;
 	public float bounceHeight = 2.0f;
 	public Transform groundCheck, headCheck;
+	public bool super;
 
 	Animator anim;
 	SpriteRenderer sr;
 	Rigidbody2D rb;
+	ArrayList headBlocks;
 
 	int groundLayer;
 	float width;
 	bool grounded;
-	bool hit;
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +27,13 @@ public class MarioController : MonoBehaviour {
 
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground") | 1 << LayerMask.NameToLayer("Block");
 		grounded = true;
+		super = false;
 
 		sr.sortingOrder = 32767;
 
 		width = sr.bounds.size.x;
+
+		headBlocks = new ArrayList();
 	}
 	
 	// Update is called once per frame
@@ -56,15 +60,32 @@ public class MarioController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c) {
 		int blockLayer = 1 << LayerMask.NameToLayer ("Block");
 		if (Physics2D.OverlapBox (headCheck.position, new Vector2 (width, 0.01f), 0.0f, blockLayer)) {
-			if (!hit) {
-				print (c.collider);
-				hit = true;
-			}
+			headBlocks.Add (c.transform);
 		}
 	}
 
 	void OnCollisionExit2D(Collision2D c) {
-		hit = false;
+		if (c.gameObject.layer == LayerMask.NameToLayer("Block")) {
+			ProcessHeadBlocks ();
+		}
+	}
+
+	void ProcessHeadBlocks() {
+		float minxdist = Mathf.Infinity;
+		int minxindex = 0;
+		for (int i = 0; i < headBlocks.Count; i++) {
+			Transform c = headBlocks [i] as Transform;
+			float xdist = Mathf.Abs(c.position.x - transform.position.x);
+			if (xdist < minxdist) {
+				minxdist = xdist;
+				minxindex = i;
+			}
+		}
+		if (headBlocks.Count > 0) {
+			Block b = ((Transform)headBlocks [minxindex]).GetComponent<Block> ();
+			b.Hit ();
+		}
+		headBlocks.Clear ();
 	}
 
 	void Move() {
@@ -78,7 +99,7 @@ public class MarioController : MonoBehaviour {
 	void Jump() {
 		if ((Input.GetButtonDown ("Jump") || Input.GetButtonDown("Up"))&& grounded) {
 			Bounce (jumpHeight);
-			Global.instance.JumpAudio (false);
+			Global.instance.JumpAudio (super);
 		}
 	}
 
