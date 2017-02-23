@@ -132,6 +132,7 @@ public class MarioController : MonoBehaviour {
 		anim.SetBool ("death", true);
 		anim.SetBool ("jump", false);
 		StartCoroutine (DeathAnimation (0.1f, bounce));
+		Camera.main.GetComponent<AudioSource> ().Stop ();
 		Global.instance.DeathAudio ();
 		Global.instance.death = true;
 	}

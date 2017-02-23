@@ -48,6 +48,7 @@ public class Global : MonoBehaviour {
 		death = false;
 		player.position = startingPosition;
 		mario.Revive ();
+		Camera.main.GetComponent<AudioSource> ().Play ();
 	}
 
 	public void JumpAudio(bool jumpType) {
