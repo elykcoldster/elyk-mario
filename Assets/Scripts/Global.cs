@@ -12,7 +12,7 @@ public class Global : MonoBehaviour {
 	public GameObject tile;
 	public Vector2 startingPosition = Vector2.zero;
 
-	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock;
+	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp;
 
 	public bool death = false;
 
@@ -65,5 +65,9 @@ public class Global : MonoBehaviour {
 
 	public void BumpAudio() {
 		AudioPlay (bump);
+	}
+
+	public void PowerUpAudio() {
+		AudioPlay (powerUp);
 	}
 }

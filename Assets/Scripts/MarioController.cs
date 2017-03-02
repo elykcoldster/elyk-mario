@@ -17,7 +17,7 @@ public class MarioController : MonoBehaviour {
 
 	int groundLayer;
 	float width;
-	bool grounded;
+	public bool grounded;
 
 	// Use this for initialization
 	void Start () {
@@ -48,7 +48,7 @@ public class MarioController : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (!Global.instance.death) {
-			grounded = Physics2D.OverlapBox (groundCheck.position, new Vector2(width, 0.01f), 0.0f, groundLayer);
+			grounded = Physics2D.OverlapBox (groundCheck.position, new Vector2(width*0.95f, 0.01f), 0.0f, groundLayer);
 			if (grounded) {
 				anim.SetBool ("jump", false);
 			} else {
@@ -93,7 +93,8 @@ public class MarioController : MonoBehaviour {
 
 		anim.SetFloat ("speed", Mathf.Abs(h));
 		sr.flipX = h == 0f ? sr.flipX : (h < 0f ? true : false);
-		transform.Translate (Vector3.right * h * Time.deltaTime * speed);
+		rb.velocity = new Vector2(h * speed, rb.velocity.y);
+		// transform.Translate (Vector3.right * h * Time.deltaTime * speed);
 	}
 
 	void Jump() {

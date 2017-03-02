@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Global.cs" />
      <Compile Include="Assets\Scripts\ItemBlock.cs" />
      <Compile Include="Assets\Scripts\MarioController.cs" />
+     <Compile Include="Assets\Scripts\SuperMushroom.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
