@@ -32,6 +32,7 @@ public class SuperMushroom : MonoBehaviour {
 					dir.x = -dir.x;
 				} else if (c.gameObject.layer == LayerMask.NameToLayer ("Player")) {
 					Global.instance.PowerUpAudio ();
+					Global.instance.mario.Super (true);
 					Destroy (gameObject);
 				}
 			}

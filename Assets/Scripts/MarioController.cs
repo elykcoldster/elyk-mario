@@ -17,12 +17,13 @@ public class MarioController : MonoBehaviour {
 
 	int groundLayer;
 	float width;
+	float height;
 	public bool grounded;
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator> ();
-		sr = GetComponent<SpriteRenderer> ();
+		anim = GetComponentInChildren<Animator> ();
+		sr = GetComponentInChildren<SpriteRenderer> ();
 		rb = GetComponent<Rigidbody2D> ();
 
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground") | 1 << LayerMask.NameToLayer("Block");
@@ -32,6 +33,7 @@ public class MarioController : MonoBehaviour {
 		sr.sortingOrder = 32767;
 
 		width = sr.bounds.size.x;
+		height = sr.bounds.size.y;
 
 		headBlocks = new ArrayList();
 	}
@@ -123,6 +125,7 @@ public class MarioController : MonoBehaviour {
 	}
 
 	public void Revive() {
+		Super (false);
 		anim.SetBool ("death", false);
 		transform.GetComponent<Collider2D> ().enabled = true;
 		rb.velocity = Vector2.zero;
@@ -136,5 +139,19 @@ public class MarioController : MonoBehaviour {
 		Camera.main.GetComponent<AudioSource> ().Stop ();
 		Global.instance.DeathAudio ();
 		Global.instance.death = true;
+	}
+
+	public void Super(bool s) {
+		super = s;
+		anim.SetBool ("super", super);
+		if (super) {
+			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 1.0f);
+		} else {
+			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 0.5f);
+		}
+		height = GetComponent<BoxCollider2D>().size.y;
+
+		groundCheck.localPosition = new Vector2 (0f, -height / 2);
+		headCheck.localPosition = new Vector2 (0f, height / 2);
 	}
 }

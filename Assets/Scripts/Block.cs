@@ -24,7 +24,7 @@ public class Block : MonoBehaviour {
 		if (!Global.instance.mario.super) {
 			audioSource.clip = bump;
 			audioSource.Play ();
-			anim.SetTrigger ("bump");
 		}
+		anim.SetTrigger ("bump");
 	}
 }

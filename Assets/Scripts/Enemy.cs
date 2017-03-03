@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
 	public float bounceLengthVariance = 2.0f;
 	public float bounceTorque = 12.0f;
 
+	Vector2 dir;
 	Animator anim;
 	Rigidbody2D rb;
 
@@ -23,13 +24,24 @@ public class Enemy : MonoBehaviour {
 		if (!bumpCheck) {
 			bumpCheck = transform.FindChild ("BumpCheck");
 		}
+		dir = Vector2.left;
 		anim = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
 		GetComponent<SpriteRenderer> ().sortingOrder = 30000;
 	}
 
+	void FixedUpdate() {
+		if (!Global.instance.death) {
+			Move ();
+		}
+	}
+
 	void Update() {
 		
+	}
+
+	void Move() {
+		rb.velocity = dir;
 	}
 
 	void Death() {
