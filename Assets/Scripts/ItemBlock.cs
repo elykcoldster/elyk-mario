@@ -20,7 +20,7 @@ public class ItemBlock : Block {
 
 	public override void Hit() {
 		if (active) {
-			base.Hit ();
+			anim.SetTrigger ("bump");
 			audioSource.clip = coinSound;
 			audioSource.Play ();
 			active = false;
@@ -29,5 +29,16 @@ public class ItemBlock : Block {
 			audioSource.clip = bump;
 			audioSource.Play ();
 		}
+	}
+
+	public void Reset() {
+		active = true;
+		anim.SetTrigger ("reset");
+		StartCoroutine (ResetAnimTrigger(Time.deltaTime));
+	}
+
+	IEnumerator ResetAnimTrigger(float t) {
+		yield return new WaitForSeconds (t);
+		anim.ResetTrigger ("reset");
 	}
 }

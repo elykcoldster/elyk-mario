@@ -44,6 +44,16 @@ public class Global : MonoBehaviour {
 		audioSource.Play ();
 	}
 
+	public void ResetWorld() {
+		ResetPosition ();
+		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Item")) {
+			item.GetComponent<ItemBlock> ().Reset ();
+		}
+		foreach (GameObject block in GameObject.FindGameObjectsWithTag("Block")) {
+			block.GetComponent<Block> ().SetVisible (true);
+		}
+	}
+
 	public void ResetPosition() {
 		death = false;
 		player.position = startingPosition;

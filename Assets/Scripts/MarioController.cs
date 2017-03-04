@@ -9,11 +9,13 @@ public class MarioController : MonoBehaviour {
 	public float bounceHeight = 2.0f;
 	public Transform groundCheck, headCheck;
 	public bool super;
+	public AudioClip smallJump, superJump;
 
 	Animator anim;
 	SpriteRenderer sr;
 	Rigidbody2D rb;
 	ArrayList headBlocks;
+	AudioSource audioSource;
 
 	int groundLayer;
 	float width;
@@ -36,6 +38,8 @@ public class MarioController : MonoBehaviour {
 		height = sr.bounds.size.y;
 
 		headBlocks = new ArrayList();
+		audioSource = gameObject.AddComponent<AudioSource> ();
+		audioSource.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
@@ -102,7 +106,8 @@ public class MarioController : MonoBehaviour {
 	void Jump() {
 		if ((Input.GetButtonDown ("Jump") || Input.GetButtonDown("Up"))&& grounded) {
 			Bounce (jumpHeight);
-			Global.instance.JumpAudio (super);
+			audioSource.clip = super ? superJump : smallJump;
+			audioSource.Play ();
 		}
 	}
 
@@ -113,7 +118,7 @@ public class MarioController : MonoBehaviour {
 		}
 		transform.GetComponent<Collider2D> ().enabled = false;
 		yield return new WaitForSeconds (Global.instance.deathAudio.length);
-		Global.instance.ResetPosition ();
+		Global.instance.ResetWorld ();
 	}
 
 	public void Bounce() {

@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: a4a6c867fd4ebc14887283a582a86041
-timeCreated: 1488417735
+timeCreated: 1488587381
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: mushroom
+    21300002: debris_tr
+    21300004: debris_tl
+    21300006: debris_bl
+    21300008: debris_br
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -28,7 +32,7 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapMode: 1
@@ -78,6 +82,58 @@ TextureImporter:
         y: 320
         width: 16
         height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: debris_tr
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 328
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: debris_tl
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 328
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: debris_bl
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: debris_br
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 320
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

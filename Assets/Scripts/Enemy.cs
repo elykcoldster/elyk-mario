@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour {
 	Animator anim;
 	Rigidbody2D rb;
 
+	bool dead;
+
 	// Use this for initialization
 	void Start () {
 		if (!topCheck) {
@@ -27,11 +29,12 @@ public class Enemy : MonoBehaviour {
 		dir = Vector2.left;
 		anim = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
+		dead = false;
 		GetComponent<SpriteRenderer> ().sortingOrder = 30000;
 	}
 
 	void FixedUpdate() {
-		if (!Global.instance.death) {
+		if (!Global.instance.death && !dead) {
 			Move ();
 		}
 	}
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Death() {
+		dead = true;
 		Global.instance.mario.Bounce ();
 		Global.instance.StompAudio ();
 
