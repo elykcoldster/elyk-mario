@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour {
 
@@ -15,6 +16,8 @@ public class Global : MonoBehaviour {
 	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
 
 	public bool death = false, pause = false;
+
+	Transform returnLocation;
 
 	AudioSource audioSource;
 
@@ -63,6 +66,7 @@ public class Global : MonoBehaviour {
 		player.position = startingPosition;
 		mario.Revive ();
 		Camera.main.GetComponent<AudioSource> ().Play ();
+		Camera.main.GetComponent<CameraFollow> ().ResetPosition ();
 	}
 
 	public void JumpAudio(bool jumpType) {
@@ -87,5 +91,14 @@ public class Global : MonoBehaviour {
 
 	public void PowerDownAudio() {
 		AudioPlay (powerDown);
+	}
+
+	public void WarpToMap(string mapName, Transform returnLocation) {
+		SetReturn (returnLocation);
+		SceneManager.LoadScene (mapName);
+	}
+
+	public void SetReturn(Transform r) {
+		returnLocation = r;
 	}
 }

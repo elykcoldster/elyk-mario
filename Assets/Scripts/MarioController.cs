@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MarioController : MonoBehaviour {
 
+	MarioController instance;
+
 	public float speed = 3.0f;
 	public float jumpHeight = 3.0f;
 	public float bounceHeight = 2.0f;
@@ -21,6 +23,16 @@ public class MarioController : MonoBehaviour {
 	float width;
 	float height;
 	public bool grounded;
+
+	void Awake() {
+		// Screen.SetResolution (1280, 720, false);
+		if (instance == null) {
+			DontDestroyOnLoad (gameObject);
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -142,6 +154,11 @@ public class MarioController : MonoBehaviour {
 
 	public void Bounce(float height) {
 		rb.AddForce (Vector2.up * height, ForceMode2D.Impulse);
+	}
+
+	public void EnterPipe(Transform returnPipe, string mapName) {
+		anim.SetTrigger ("pipe");
+		Global.instance.WarpToMap (mapName, returnPipe);
 	}
 
 	public void Revive() {
