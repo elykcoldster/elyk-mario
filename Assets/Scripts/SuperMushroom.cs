@@ -27,6 +27,7 @@ public class SuperMushroom : MonoBehaviour {
 		if (move) {
 			transform.Translate (dir * moveSpeed * Time.deltaTime);
 			Collider2D c = Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.5f, 0f), 0f, selfLayer);
+
 			if (c) {
 				if (c.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
 					dir.x = -dir.x;

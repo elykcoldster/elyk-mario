@@ -40,11 +40,20 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Update() {
-		
+		if (!dead) {
+			LayerMask selfLayer = ~(1 << LayerMask.NameToLayer ("Enemy"));
+			Collider2D c = Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.5f, 0f), 0f, selfLayer);
+
+			if (c) {
+				if (c.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
+					dir.x = -dir.x;
+				}
+			}
+		}
 	}
 
 	void Move() {
-		rb.velocity = dir;
+		rb.velocity = new Vector2(0f, rb.velocity.y) + dir;
 	}
 
 	void Death() {

@@ -13,5 +13,9 @@ public class FallDeath : MonoBehaviour {
 		if (c.transform.tag == "Player" && !Global.instance.death) {
 			Global.instance.mario.Die (false);
 		}
+
+		if (c.transform.tag == "Enemy" || c.transform.tag == "Item") {
+			Destroy (c.gameObject);
+		}
 	}
 }
