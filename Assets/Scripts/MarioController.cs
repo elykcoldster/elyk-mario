@@ -8,7 +8,7 @@ public class MarioController : MonoBehaviour {
 	public float jumpHeight = 3.0f;
 	public float bounceHeight = 2.0f;
 	public Transform groundCheck, headCheck;
-	public bool super;
+	public bool super, starPower;
 	public AudioClip smallJump, superJump;
 
 	Animator anim;
@@ -31,6 +31,7 @@ public class MarioController : MonoBehaviour {
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground") | 1 << LayerMask.NameToLayer("Block");
 		grounded = true;
 		super = false;
+		starPower = false;
 
 		sr.sortingOrder = 32767;
 
@@ -121,6 +122,20 @@ public class MarioController : MonoBehaviour {
 		Global.instance.ResetWorld ();
 	}
 
+	IEnumerator DisableInvincible(float t) {
+		yield return new WaitForSeconds (t);
+		gameObject.layer = LayerMask.NameToLayer ("Player");
+		sr.enabled = true;
+	}
+
+	IEnumerator FlashSprite(float t) {
+		if (gameObject.layer == LayerMask.NameToLayer ("Invincible")) {
+			sr.enabled = !sr.enabled;
+			yield return new WaitForSeconds (t);
+			StartCoroutine (FlashSprite (t));
+		}
+	}
+
 	public void Bounce() {
 		rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
 	}
@@ -146,6 +161,12 @@ public class MarioController : MonoBehaviour {
 		Global.instance.death = true;
 	}
 
+	public void Mini() {
+		Super (false);
+		Invincible (2.5f);
+		Global.instance.PowerDownAudio ();
+	}
+
 	public void Super(bool s) {
 		super = s;
 		anim.SetBool ("super", super);
@@ -158,5 +179,11 @@ public class MarioController : MonoBehaviour {
 
 		groundCheck.localPosition = new Vector2 (0f, -height / 2);
 		headCheck.localPosition = new Vector2 (0f, height / 2);
+	}
+
+	public void Invincible(float t) {
+		gameObject.layer = LayerMask.NameToLayer ("Invincible");
+		StartCoroutine (FlashSprite (0.1f));
+		StartCoroutine (DisableInvincible (t));
 	}
 }

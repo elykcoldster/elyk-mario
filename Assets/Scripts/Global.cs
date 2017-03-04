@@ -12,13 +12,14 @@ public class Global : MonoBehaviour {
 	public GameObject tile;
 	public Vector2 startingPosition = Vector2.zero;
 
-	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp;
+	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
 
-	public bool death = false;
+	public bool death = false, pause = false;
 
 	AudioSource audioSource;
 
 	void Awake() {
+		// Screen.SetResolution (1280, 720, false);
 		if (instance == null) {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
@@ -52,6 +53,9 @@ public class Global : MonoBehaviour {
 		foreach (GameObject block in GameObject.FindGameObjectsWithTag("Block")) {
 			block.GetComponent<Block> ().SetVisible (true);
 		}
+		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
+			enemy.GetComponent<Enemy> ().Revive ();
+		}
 	}
 
 	public void ResetPosition() {
@@ -79,5 +83,9 @@ public class Global : MonoBehaviour {
 
 	public void PowerUpAudio() {
 		AudioPlay (powerUp);
+	}
+
+	public void PowerDownAudio() {
+		AudioPlay (powerDown);
 	}
 }

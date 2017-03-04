@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\MarioController.cs" />
      <Compile Include="Assets\Scripts\SuperMushroom.cs" />
      <Compile Include="Assets\Scripts\TileGen.cs" />
+     <Compile Include="Assets\WarpPipe.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

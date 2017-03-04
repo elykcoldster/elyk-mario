@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 415e4a91185d9b848ac010bd6cd3bea6
-timeCreated: 1488598556
+timeCreated: 1488647392
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: sky_tile
+    21300002: flag
+    21300004: castle_s_brown
+    21300006: flag_top_g
+    21300008: flag_pole_g
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,6 +80,58 @@ TextureImporter:
         serializedVersion: 2
         x: 274
         y: 905
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: flag
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1181
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: castle_s_brown
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 954
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: flag_top_g
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 1198
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: flag_pole_g
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 1054
         width: 16
         height: 16
       alignment: 0
