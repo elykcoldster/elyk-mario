@@ -4,31 +4,53 @@ using UnityEngine;
 
 public class WarpPipe : MonoBehaviour {
 
-	public Transform returnPipe;
-	public Transform target;
-	public Transform warpTrigger;
-	public Vector2 warpTriggerSize;
-	public Vector2 triggerDirection = Vector2.down;
+	public Transform bumpCheck;
+
+	public int returnPipeNumber = -1;
+	public int warpPipeNumber;
+	public string target;
+
+	public bool active = true;
+	public bool walkInPipe = false;
+
+	bool canWarp;
 
 	// Use this for initialization
 	void Start () {
-		if (!warpTrigger) {
-			warpTrigger = (new GameObject ()).transform;
-			warpTrigger.position = transform.position;
-			warpTrigger.parent = transform;
+		canWarp = false;
+	}
+
+	void Update() {
+		if (canWarp) {
+			if (!walkInPipe && (Input.GetKeyDown (KeyCode.DownArrow) || Input.GetKeyDown (KeyCode.S))) {
+				if (returnPipeNumber == -1) {
+					Global.instance.EnterPipe (target, "pipe_down");
+				} else {
+					Global.instance.EnterPipe (returnPipeNumber, target, "pipe_down");
+				}
+			} else if (walkInPipe) {
+				Collider2D c = Physics2D.OverlapBox (bumpCheck.position, Vector2.zero, 0f);
+				if (c.tag == "Player" && Input.GetButton("Horizontal")) {
+					if (returnPipeNumber == -1) {
+						Global.instance.EnterPipe (target, "pipe_left");
+					} else {
+						Global.instance.EnterPipe (returnPipeNumber, target, "pipe_left");
+					}
+				}
+			}
 		}
 	}
-	
+
 	// Update is called once per frame
 	void OnCollisionStay2D(Collision2D c) {
-		if (Global.instance.mario.grounded && c.gameObject.tag == "Player") {
-			if (triggerDirection.y == -1 && (Input.GetKeyDown (KeyCode.DownArrow) || Input.GetKeyDown (KeyCode.S))) {
-				Global.instance.mario.EnterPipe (returnPipe, target, "pipe_down");
-			} else if (triggerDirection.x == 1 && (Input.GetKey (KeyCode.RightArrow) || Input.GetKeyDown (KeyCode.D))) {
-				Global.instance.mario.EnterPipe (returnPipe, target, "pipe_right");
-			} else if (triggerDirection.x == -1 && (Input.GetKey (KeyCode.LeftArrow) || Input.GetKeyDown (KeyCode.A))) {
-				Global.instance.mario.EnterPipe (returnPipe, target, "pipe_left");
-			}
+		if (Global.instance.mario.grounded && c.gameObject.tag == "Player" && active) {
+			canWarp = true;
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D c) {
+		if (c.gameObject.tag == "Player") {
+			canWarp = false;
 		}
 	}
 }

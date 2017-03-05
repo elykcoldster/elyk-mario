@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MarioController : MonoBehaviour {
 
-	MarioController instance;
+	public static MarioController instance;
 
 	public float speed = 3.0f;
 	public float jumpHeight = 3.0f;
@@ -32,6 +33,10 @@ public class MarioController : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
+	}
+
+	void OnEnable() {
+		Start();
 	}
 
 	// Use this for initialization
@@ -158,7 +163,7 @@ public class MarioController : MonoBehaviour {
 
 	public void EnterPipe(Transform returnPipe, Transform target, string triggerType) {
 		anim.SetTrigger (triggerType);
-		Global.instance.WarpToMap (target, returnPipe);
+		// Global.instance.WarpToMap (target, returnPipe);
 	}
 
 	public void Revive() {

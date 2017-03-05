@@ -8,10 +8,10 @@ public class Global : MonoBehaviour {
 	public static Global instance;
 
 	public MarioController mario;
+	public Transform spawnPoint;
 	public Transform player;
 	public Transform tiles;
 	public GameObject tile;
-	public Vector2 startingPosition = Vector2.zero;
 
 	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
 
@@ -19,7 +19,7 @@ public class Global : MonoBehaviour {
 
 	public Map activeMap;
 
-	Transform returnLocation;
+	public int returnLocation;
 
 	AudioSource audioSource;
 
@@ -65,10 +65,10 @@ public class Global : MonoBehaviour {
 
 	public void ResetPosition() {
 		death = false;
-		player.position = startingPosition;
+		player.position = spawnPoint.position;
 		mario.Revive ();
 		Camera.main.GetComponent<AudioSource> ().Play ();
-		Camera.main.GetComponent<CameraFollow> ().ResetPosition ();
+		MainCamera.instance.ResetPosition ();
 	}
 
 	public void JumpAudio(bool jumpType) {
@@ -95,22 +95,46 @@ public class Global : MonoBehaviour {
 		AudioPlay (powerDown);
 	}
 
-	public void WarpToMap(Transform target, Transform returnLocation) {
-		StartCoroutine (Warp (1f, target, returnLocation));
-		// SceneManager.LoadScene (mapName);
-	}
+//	public void WarpToMap(Transform target, Transform returnLocation) {
+//		StartCoroutine (Warp (1f, target, returnLocation));
+//		// SceneManager.LoadScene (mapName);
+//	}
 
-	public void SetReturn(Transform r) {
+	public void SetReturn(int r) {
 		returnLocation = r;
 	}
 
-	IEnumerator Warp(float t, Transform target, Transform returnLocation) {
-		yield return new WaitForSeconds (t);
-		SetReturn (returnLocation);
-
-		player.position = target.position;
-		Map map = target.GetComponentInParent<Map> ();
-		Camera.main.GetComponent<CameraFollow> ().cameraHeight = map.ground.position.y + Camera.main.orthographicSize - 0.5f;
-		Camera.main.backgroundColor = map.backgroundColor;
+	public Transform GetPipe(int p) {
+		WarpPipe[] warpPipes = (WarpPipe[]) GameObject.FindObjectsOfType (typeof(WarpPipe));
+		if (warpPipes.Length > 0) {
+			foreach (WarpPipe wp in warpPipes) {
+				if (wp.warpPipeNumber == p) {
+					return wp.transform;
+				}
+			}
+			return null;
+		} else {
+			return null;
+		}
 	}
+
+	public void EnterPipe(int returnPipeNumber, string target, string pipeAnim) {
+		SetReturn (returnPipeNumber);
+		SceneManager.LoadScene (target);
+	}
+
+	public void EnterPipe(string target, string pipeAnim) {
+		SetReturn (-1);
+		SceneManager.LoadScene (target);
+	}
+
+//	IEnumerator Warp(float t, Transform target, Transform returnLocation) {
+//		yield return new WaitForSeconds (t);
+//		SetReturn (returnLocation);
+//
+//		player.position = target.position;
+//		Map map = target.GetComponentInParent<Map> ();
+//		MainCamera.instance.cameraHeight = map.ground.position.y + Camera.main.orthographicSize - 0.5f;
+//		Camera.main.backgroundColor = map.backgroundColor;
+//	}
 }
