@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 056e4303a7fdf2649bb6c068d0f6e565
-timeCreated: 1488599145
+timeCreated: 1488669522
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,8 @@ TextureImporter:
     21300006: pipe_head
     21300008: pipe_body
     21300010: tile_2
+    21300012: block_2
+    21300014: tile_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -146,6 +148,32 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: block_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 400
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tile_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
         width: 16
         height: 16
       alignment: 0

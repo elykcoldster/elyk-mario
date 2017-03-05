@@ -17,6 +17,8 @@ public class Global : MonoBehaviour {
 
 	public bool death = false, pause = false;
 
+	public Map activeMap;
+
 	Transform returnLocation;
 
 	AudioSource audioSource;
@@ -93,12 +95,22 @@ public class Global : MonoBehaviour {
 		AudioPlay (powerDown);
 	}
 
-	public void WarpToMap(string mapName, Transform returnLocation) {
-		SetReturn (returnLocation);
-		SceneManager.LoadScene (mapName);
+	public void WarpToMap(Transform target, Transform returnLocation) {
+		StartCoroutine (Warp (1f, target, returnLocation));
+		// SceneManager.LoadScene (mapName);
 	}
 
 	public void SetReturn(Transform r) {
 		returnLocation = r;
+	}
+
+	IEnumerator Warp(float t, Transform target, Transform returnLocation) {
+		yield return new WaitForSeconds (t);
+		SetReturn (returnLocation);
+
+		player.position = target.position;
+		Map map = target.GetComponentInParent<Map> ();
+		Camera.main.GetComponent<CameraFollow> ().cameraHeight = map.ground.position.y + Camera.main.orthographicSize - 0.5f;
+		Camera.main.backgroundColor = map.backgroundColor;
 	}
 }

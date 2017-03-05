@@ -156,9 +156,9 @@ public class MarioController : MonoBehaviour {
 		rb.AddForce (Vector2.up * height, ForceMode2D.Impulse);
 	}
 
-	public void EnterPipe(Transform returnPipe, string mapName) {
-		anim.SetTrigger ("pipe");
-		Global.instance.WarpToMap (mapName, returnPipe);
+	public void EnterPipe(Transform returnPipe, Transform target, string triggerType) {
+		anim.SetTrigger (triggerType);
+		Global.instance.WarpToMap (target, returnPipe);
 	}
 
 	public void Revive() {
@@ -202,5 +202,9 @@ public class MarioController : MonoBehaviour {
 		gameObject.layer = LayerMask.NameToLayer ("Invincible");
 		StartCoroutine (FlashSprite (0.1f));
 		StartCoroutine (DisableInvincible (t));
+	}
+
+	public void ResetTrigger(string trig) {
+		anim.ResetTrigger (trig);
 	}
 }

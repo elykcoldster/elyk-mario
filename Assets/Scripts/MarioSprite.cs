@@ -14,4 +14,8 @@ public class MarioSprite : MonoBehaviour {
 	public void SetSpriteOrder(int order) {
 		sr.sortingOrder = order;
 	}
+
+	public void ResetTrigger(string trig) {
+		Global.instance.mario.ResetTrigger (trig);
+	}
 }
