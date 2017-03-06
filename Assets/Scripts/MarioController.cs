@@ -25,6 +25,7 @@ public class MarioController : MonoBehaviour {
 	float height;
 	public bool grounded;
 
+	/* System functions */
 	void Awake() {
 		// Screen.SetResolution (1280, 720, false);
 		if (instance == null) {
@@ -62,18 +63,20 @@ public class MarioController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!Global.instance.death) {
+		if (!Global.instance.death && !Global.instance.win) {
 			Move ();
 			Jump ();
 		} else {
-			anim.SetBool ("death", true);
+			if (Global.instance.death) {
+				anim.SetBool ("death", true);
+			}
 		}
 	}
 
 	void FixedUpdate() {
 		if (!Global.instance.death) {
 			grounded = Physics2D.OverlapBox (groundCheck.position, new Vector2(width*0.95f, 0.01f), 0.0f, groundLayer);
-			if (grounded) {
+			if (grounded || Global.instance.win) {
 				anim.SetBool ("jump", false);
 			} else {
 				anim.SetBool ("jump", true);
@@ -94,6 +97,7 @@ public class MarioController : MonoBehaviour {
 		}
 	}
 
+	/* Private functions */
 	void ProcessHeadBlocks() {
 		float minxdist = Mathf.Infinity;
 		int minxindex = 0;
@@ -129,6 +133,7 @@ public class MarioController : MonoBehaviour {
 		}
 	}
 
+	/* Coroutines */
 	IEnumerator DeathAnimation(float t, bool bounce) {
 		yield return new WaitForSeconds (t);
 		if (bounce) {
@@ -153,6 +158,7 @@ public class MarioController : MonoBehaviour {
 		}
 	}
 
+	/* Public functions */
 	public void Bounce() {
 		rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
 	}
@@ -211,5 +217,12 @@ public class MarioController : MonoBehaviour {
 
 	public void ResetTrigger(string trig) {
 		anim.ResetTrigger (trig);
+	}
+
+	public void Flag() {
+		Global.instance.win = true;
+		rb.isKinematic = true;
+		rb.velocity = Vector2.zero;
+		anim.SetTrigger ("flag");
 	}
 }

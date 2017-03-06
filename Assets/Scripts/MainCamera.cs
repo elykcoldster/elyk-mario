@@ -43,4 +43,9 @@ public class MainCamera : MonoBehaviour {
 	public void SetColor(Color c) {
 		GetComponent<Camera> ().backgroundColor = c;
 	}
+
+	public void SetBGM(AudioClip bgm) {
+		GetComponent<AudioSource> ().clip = bgm;
+		GetComponent<AudioSource> ().Play ();
+	}
 }

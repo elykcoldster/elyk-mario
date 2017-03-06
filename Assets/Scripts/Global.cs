@@ -15,7 +15,7 @@ public class Global : MonoBehaviour {
 
 	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
 
-	public bool death = false, pause = false;
+	public bool death = false, pause = false, win = false;
 
 	public Map activeMap;
 

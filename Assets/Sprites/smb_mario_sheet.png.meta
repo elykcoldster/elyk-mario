@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2d949c1e914067742abe4f057ac7249e
-timeCreated: 1488518804
+timeCreated: 1488760091
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,6 +15,7 @@ TextureImporter:
     21300016: super_mario_walk_2
     21300018: super_mario_walk_3
     21300020: super_mario_jump
+    21300022: mario_flag
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -218,6 +219,19 @@ TextureImporter:
         y: 104
         width: 16
         height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_flag
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 143
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
