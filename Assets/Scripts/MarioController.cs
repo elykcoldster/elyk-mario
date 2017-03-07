@@ -63,7 +63,7 @@ public class MarioController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!Global.instance.death && !Global.instance.win) {
+		if (!Global.instance.win && Global.instance.control) {
 			Move ();
 			Jump ();
 		} else {
@@ -220,9 +220,15 @@ public class MarioController : MonoBehaviour {
 	}
 
 	public void Flag() {
-		Global.instance.win = true;
-		rb.isKinematic = true;
 		rb.velocity = Vector2.zero;
+		rb.isKinematic = true;
 		anim.SetTrigger ("flag");
+	}
+
+	public void WinAnimation() {
+		anim.SetTrigger ("reset");
+		anim.SetFloat ("speed", 0f);
+		// Global.instance.win = false;
+		// rb.isKinematic = false;
 	}
 }

@@ -21,22 +21,25 @@ public class Flag : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c) {
 		if (c.tag == "Player") {
 			Global.instance.mario.Flag ();
+			Global.instance.win = true;
 			StartCoroutine (StartSlideDownFlag (0.5f));
 		}
 	}
 
 	void SlideDownFlag() {
 		if (slide && MarioController.instance.transform.position.y > flagBase.position.y + 0.5f) {
-			MarioController.instance.transform.Translate (Vector2.down * Time.deltaTime * 2f);
+			MarioController.instance.transform.Translate (Vector2.down * Time.deltaTime * 3f);
 		}
-
-		if (slide && flag.position.y > flagBase.position.y + 0.5f) {
+		/*if (slide && flag.position.y > flagBase.position.y + 0.5f) {
 			flag.Translate (Vector2.down * Time.deltaTime * 2f);
-		}
+		} else {
+			slide = false;
+		}*/
 	}
 
 	IEnumerator StartSlideDownFlag(float t) {
 		yield return new WaitForSeconds(t);
 		slide = true;
+		flag.GetComponent<Animator> ().SetTrigger ("drop");
 	}
 }

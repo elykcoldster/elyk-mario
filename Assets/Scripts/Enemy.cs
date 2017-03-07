@@ -13,14 +13,14 @@ public class Enemy : MonoBehaviour {
 	public float bounceTorque = 12.0f;
 	public Vector2 startingPosition;
 
-	Vector2 dir;
-	Animator anim;
-	Rigidbody2D rb;
-
-	bool dead;
+	protected Vector2 dir;
+	protected Animator anim;
+	protected Rigidbody2D rb;
+	protected bool dead;
+	protected SpriteRenderer sr;
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		if (!topCheck) {
 			topCheck = transform.FindChild ("TopCheck");
 		}
@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour {
 		dir = Vector2.left;
 		anim = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
+		sr = GetComponent<SpriteRenderer> ();
+
 		dead = false;
 		GetComponent<SpriteRenderer> ().sortingOrder = 30000;
 	}
@@ -40,7 +42,9 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	protected void Update() {
+		GetComponent<BoxCollider2D>().size = new Vector2(sr.bounds.size.x, sr.bounds.size.y);
+
 		if (!dead) {
 			LayerMask selfLayer = ~(1 << LayerMask.NameToLayer ("Enemy"));
 			Collider2D c = Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.5f, 0f), 0f, selfLayer);
@@ -54,7 +58,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Move() {
-		rb.velocity = new Vector2(0f, rb.velocity.y) + dir;
+		rb.velocity = new Vector2(0f, rb.velocity.y) + dir * speed;
 	}
 
 	void Death(bool bounce) {
@@ -77,7 +81,7 @@ public class Enemy : MonoBehaviour {
 		GetComponent<SpriteRenderer> ().enabled = false;
 	}
 
-	void OnCollisionStay2D(Collision2D c) {
+	void OnCollisionEnter2D(Collision2D c) {
 		int layerMask = 1 << LayerMask.NameToLayer ("Player");
 		if (c.transform.tag == "Player" && !Global.instance.death) {
 			if (Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.51f, 0.1f), 0f, layerMask)) {

@@ -52,8 +52,10 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\FallDeath.cs" />
      <Compile Include="Assets\Scripts\Flag.cs" />
+     <Compile Include="Assets\Scripts\FlagFunctions.cs" />
      <Compile Include="Assets\Scripts\Global.cs" />
      <Compile Include="Assets\Scripts\ItemBlock.cs" />
+     <Compile Include="Assets\Scripts\Koopa.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Map.cs" />
      <Compile Include="Assets\Scripts\MarioController.cs" />

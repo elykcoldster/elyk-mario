@@ -15,11 +15,13 @@ public class Global : MonoBehaviour {
 
 	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
 
-	public bool death = false, pause = false, win = false;
+	public bool death = false, pause = false, win = false, control = true;
 
 	public Map activeMap;
 
 	public int returnLocation;
+
+	bool right, left;
 
 	AudioSource audioSource;
 
@@ -37,6 +39,14 @@ public class Global : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ResetPosition();
+	}
+
+	void Update() {
+		if (death || pause || win) {
+			control = false;
+		} else {
+			control = true;
+		}
 	}
 
 	void GenerateGround(int length) {
