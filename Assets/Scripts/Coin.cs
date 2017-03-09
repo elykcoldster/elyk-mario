@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour {
 
+	public int points;
+
 	void Start () {
 		GetComponent<Animator> ().SetTrigger ("appear");
+		Global.instance.GetCoin ();
+		Global.instance.GetPoints (points);
 		StartCoroutine (Disappear (0.1f));
 	}
 

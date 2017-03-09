@@ -10,6 +10,7 @@ public class SuperMushroom : MonoBehaviour {
 	int selfLayer;
 
 	public Transform bumpCheck;
+	public int points;
 
 	void Start () {
 		GetComponent<Animator> ().SetTrigger ("rise");
@@ -34,6 +35,7 @@ public class SuperMushroom : MonoBehaviour {
 				} else if (c.gameObject.layer == LayerMask.NameToLayer ("Player")) {
 					Global.instance.PowerUpAudio ();
 					Global.instance.mario.Super (true);
+					Global.instance.GetPoints (points);
 					Destroy (gameObject);
 				}
 			}

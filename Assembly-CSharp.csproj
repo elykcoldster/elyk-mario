@@ -60,8 +60,10 @@
      <Compile Include="Assets\Scripts\Map.cs" />
      <Compile Include="Assets\Scripts\MarioController.cs" />
      <Compile Include="Assets\Scripts\MarioSprite.cs" />
+     <Compile Include="Assets\Scripts\PhysicalCoin.cs" />
      <Compile Include="Assets\Scripts\SuperMushroom.cs" />
      <Compile Include="Assets\Scripts\TileGen.cs" />
+     <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\WarpPipe.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

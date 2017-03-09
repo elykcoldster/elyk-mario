@@ -48,7 +48,6 @@ public class MarioController : MonoBehaviour {
 
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground") | 1 << LayerMask.NameToLayer("Block");
 		grounded = true;
-		super = false;
 		starPower = false;
 
 		sr.sortingOrder = 32767;
@@ -173,7 +172,6 @@ public class MarioController : MonoBehaviour {
 	}
 
 	public void Revive() {
-		Super (false);
 		anim.SetBool ("death", false);
 		transform.GetComponent<Collider2D> ().enabled = true;
 		rb.velocity = Vector2.zero;
@@ -183,8 +181,13 @@ public class MarioController : MonoBehaviour {
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		anim.SetBool ("death", true);
 		anim.SetBool ("jump", false);
+
+		Super (false);
+
 		StartCoroutine (DeathAnimation (0.1f, bounce));
+
 		Camera.main.GetComponent<AudioSource> ().Stop ();
+
 		Global.instance.DeathAudio ();
 		Global.instance.death = true;
 	}

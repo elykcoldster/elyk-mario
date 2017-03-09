@@ -27,7 +27,7 @@ public class Block : MonoBehaviour {
 //	}
 
 	public virtual void Hit() {
-		if (!Global.instance.mario.super) {
+		if (!MarioController.instance.super) {
 			audioSource.clip = bump;
 			audioSource.Play ();
 		} else {

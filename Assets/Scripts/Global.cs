@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Global : MonoBehaviour {
 
 	public static Global instance;
+	public static int coins, points;
 
 	public MarioController mario;
 	public Transform spawnPoint;
@@ -136,6 +137,16 @@ public class Global : MonoBehaviour {
 	public void EnterPipe(string target, string pipeAnim) {
 		SetReturn (-1);
 		SceneManager.LoadScene (target);
+	}
+
+	public void GetCoin() {
+		coins++;
+		UI.instance.SetCoins (coins);
+	}
+
+	public void GetPoints(int p) {
+		points += p;
+		UI.instance.SetPoints (points);
 	}
 
 //	IEnumerator Warp(float t, Transform target, Transform returnLocation) {

@@ -40,20 +40,23 @@ public class Enemy : MonoBehaviour {
 		if (!Global.instance.death && !Global.instance.pause && !dead) {
 			Move ();
 		}
+		if (Global.instance.death) {
+			rb.velocity = Vector2.zero;
+		}
 	}
 
 	protected void Update() {
 		GetComponent<BoxCollider2D>().size = new Vector2(sr.bounds.size.x, sr.bounds.size.y);
 
 		if (!dead) {
-			LayerMask selfLayer = ~(1 << LayerMask.NameToLayer ("Enemy"));
-			Collider2D c = Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.5f, 0f), 0f, selfLayer);
+			// LayerMask selfLayer = ~(1 << LayerMask.NameToLayer ("Enemy"));
+			// Collider2D c = Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.5f, 0f), 0f, selfLayer);
 
-			if (c) {
-				if (c.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
-					dir.x = -dir.x;
-				}
-			}
+//			if (c) {
+//				if (c.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
+//					dir.x = -dir.x;
+//				}
+//			}
 		}
 	}
 
@@ -61,12 +64,14 @@ public class Enemy : MonoBehaviour {
 		rb.velocity = new Vector2(0f, rb.velocity.y) + dir * speed;
 	}
 
-	void Death(bool bounce) {
+	public void Death(bool bounce) {
 		dead = true;
 		if (bounce) {
 			Global.instance.mario.Bounce ();
 		}
+
 		Global.instance.StompAudio ();
+		Global.instance.GetPoints (100);
 
 		anim.SetBool ("death", true);
 		GetComponent<Collider2D> ().enabled = false;
@@ -88,7 +93,7 @@ public class Enemy : MonoBehaviour {
 				if (Global.instance.mario.starPower) {
 					Death (false);
 				} else {
-					if (Global.instance.mario.super) {
+					if (MarioController.instance.super) {
 						Global.instance.mario.Mini ();
 					} else {
 						Global.instance.mario.Die (true);
@@ -96,6 +101,16 @@ public class Enemy : MonoBehaviour {
 				}
 			} else if (Physics2D.OverlapBox (topCheck.position, new Vector2 (0.5f, 0.01f), 0f, layerMask)) {
 				Death (true);
+			}
+		}
+
+		if (c.transform.tag == "Wall") {
+			dir.x = -dir.x;
+			rb.velocity = dir;
+			if (dir.x > 0f) {
+				sr.flipX = true;
+			} else {
+				sr.flipX = false;
 			}
 		}
 	}
