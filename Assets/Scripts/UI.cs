@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour {
 
 	public static UI instance;
-	public Text points, coins;
+	public Text points, coins, winText;
 
 	void Awake() {
 		if (instance == null) {
@@ -23,5 +23,9 @@ public class UI : MonoBehaviour {
 
 	public void SetCoins(int c) {
 		coins.text = "x" + c.ToString ("00");
+	}
+
+	public void WinText() {
+		winText.enabled = true;
 	}
 }

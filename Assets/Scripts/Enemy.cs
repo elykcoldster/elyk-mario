@@ -12,11 +12,12 @@ public class Enemy : MonoBehaviour {
 	public float bounceLengthVariance = 2.0f;
 	public float bounceTorque = 12.0f;
 	public Vector2 startingPosition;
+	public Vector2 startingVelocity = Vector2.left;
 
 	protected Vector2 dir;
 	protected Animator anim;
 	protected Rigidbody2D rb;
-	protected bool dead;
+	protected bool dead, canMove;
 	protected SpriteRenderer sr;
 
 	// Use this for initialization
@@ -27,26 +28,28 @@ public class Enemy : MonoBehaviour {
 		if (!bumpCheck) {
 			bumpCheck = transform.FindChild ("BumpCheck");
 		}
-		dir = Vector2.left;
+		dir = startingVelocity;
 		anim = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 
 		dead = false;
+		canMove = false;
 		GetComponent<SpriteRenderer> ().sortingOrder = 30000;
 	}
 
 	void FixedUpdate() {
-		if (!Global.instance.death && !Global.instance.pause && !dead) {
+		if (!Global.instance.death && !Global.instance.pause && !dead && canMove) {
 			Move ();
-		}
-		if (Global.instance.death) {
-			rb.velocity = Vector2.zero;
 		}
 	}
 
 	protected void Update() {
 		GetComponent<BoxCollider2D>().size = new Vector2(sr.bounds.size.x, sr.bounds.size.y);
+
+		if (Global.instance.death || !canMove) {
+			rb.velocity = Vector2.zero;
+		}
 
 		if (!dead) {
 			// LayerMask selfLayer = ~(1 << LayerMask.NameToLayer ("Enemy"));
@@ -64,8 +67,13 @@ public class Enemy : MonoBehaviour {
 		rb.velocity = new Vector2(0f, rb.velocity.y) + dir * speed;
 	}
 
+	protected void OnBecameVisible() {
+		canMove = true;
+	}
+
 	public void Death(bool bounce) {
 		dead = true;
+		rb.freezeRotation = false;
 		if (bounce) {
 			Global.instance.mario.Bounce ();
 		}

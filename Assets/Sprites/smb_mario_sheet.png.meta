@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2d949c1e914067742abe4f057ac7249e
-timeCreated: 1488850834
+timeCreated: 1489035013
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,13 @@ TextureImporter:
     21300020: super_mario_jump
     21300022: mario_flag
     21300024: super_mario_flag
+    21300026: fire_mario_stand
+    21300028: fire_mario_walk_1
+    21300030: fire_mario_walk_2
+    21300032: fire_mario_walk_3
+    21300034: fire_mario_shoot
+    21300036: fire_mario_jump
+    21300038: fire_mario_flag
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -244,6 +251,97 @@ TextureImporter:
         serializedVersion: 2
         x: 363
         y: 72
+        width: 14
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_stand
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 34
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_walk_1
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 34
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_walk_2
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 35
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_walk_3
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 35
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_shoot
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 35
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_jump
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 34
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fire_mario_flag
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 2
         width: 14
         height: 27
       alignment: 0

@@ -6,6 +6,7 @@ public class ItemBlock : Block {
 
 	public AudioClip coinSound;
 	public GameObject item;
+	public GameObject alternateItem;
 
 	bool active;
 
@@ -15,7 +16,11 @@ public class ItemBlock : Block {
 	}
 
 	void SpawnItem() {
-		Instantiate (item, transform.position, Quaternion.identity);
+		if (MarioController.instance.super && item.name == "Super Mushroom" && alternateItem) {
+			Instantiate (alternateItem, transform.position, Quaternion.identity);
+		} else {
+			Instantiate (item, transform.position, Quaternion.identity);
+		}
 	}
 
 	public override void Hit() {

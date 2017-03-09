@@ -48,4 +48,12 @@ public class MainCamera : MonoBehaviour {
 		GetComponent<AudioSource> ().clip = bgm;
 		GetComponent<AudioSource> ().Play ();
 	}
+
+	public void Audio(bool play) {
+		if (play) {
+			GetComponent<AudioSource> ().Play ();
+		} else {
+			GetComponent<AudioSource> ().Stop ();
+		}
+	}
 }

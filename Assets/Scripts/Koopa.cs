@@ -93,7 +93,6 @@ public class Koopa : Enemy {
 				Slide (f * slideSpeed);
 			}
 		} else if (c.transform.tag == "Enemy" && !Global.instance.death && dead && Mathf.Abs(rb.velocity.x) > 0.1f) {
-			print (rb.velocity.x);
 			c.gameObject.GetComponent<Enemy> ().Death (false);
 			rb.velocity = dir;
 		}

@@ -11,8 +11,9 @@ public class MarioController : MonoBehaviour {
 	public float jumpHeight = 3.0f;
 	public float bounceHeight = 2.0f;
 	public Transform groundCheck, headCheck;
-	public bool super, starPower;
+	public bool super, fire, starPower;
 	public AudioClip smallJump, superJump;
+	public GameObject fireball;
 
 	Animator anim;
 	SpriteRenderer sr;
@@ -64,6 +65,7 @@ public class MarioController : MonoBehaviour {
 	void Update () {
 		if (!Global.instance.win && Global.instance.control) {
 			Move ();
+			Shoot ();
 			Jump ();
 		} else {
 			if (Global.instance.death) {
@@ -132,6 +134,13 @@ public class MarioController : MonoBehaviour {
 		}
 	}
 
+	void Shoot() {
+		if (fire && Input.GetButtonDown("Fire3")) {
+			GameObject fb = Instantiate (fireball, transform.position, Quaternion.identity);
+			fb.GetComponent<Fireball> ().Initialize (new Vector2(sr.flipX ? -1f : 1f,  0f));
+		}
+	}
+
 	/* Coroutines */
 	IEnumerator DeathAnimation(float t, bool bounce) {
 		yield return new WaitForSeconds (t);
@@ -159,7 +168,8 @@ public class MarioController : MonoBehaviour {
 
 	/* Public functions */
 	public void Bounce() {
-		rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
+		// rb.AddForce (Vector2.up * bounceHeight, ForceMode2D.Impulse);
+		rb.velocity = new Vector2(rb.velocity.x, bounceHeight);
 	}
 
 	public void Bounce(float height) {
@@ -202,6 +212,20 @@ public class MarioController : MonoBehaviour {
 		super = s;
 		anim.SetBool ("super", super);
 		if (super) {
+			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 1.0f);
+		} else {
+			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 0.5f);
+		}
+		height = GetComponent<BoxCollider2D>().size.y;
+
+		groundCheck.localPosition = new Vector2 (0f, -height / 2);
+		headCheck.localPosition = new Vector2 (0f, height / 2);
+	}
+
+	public void Fire(bool f) {
+		fire = f;
+		anim.SetBool ("fire", fire);
+		if (fire) {
 			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 1.0f);
 		} else {
 			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 0.5f);

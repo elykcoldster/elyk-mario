@@ -14,7 +14,7 @@ public class Global : MonoBehaviour {
 	public Transform tiles;
 	public GameObject tile;
 
-	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown;
+	public AudioClip deathAudio, stomp, smallJump, superJump, bump, breakBlock, powerUp, powerDown, stageClear;
 
 	public bool death = false, pause = false, win = false, control = true;
 
@@ -27,7 +27,7 @@ public class Global : MonoBehaviour {
 	AudioSource audioSource;
 
 	void Awake() {
-		// Screen.SetResolution (1280, 720, false);
+		Screen.SetResolution (1280, 960, false);
 		if (instance == null) {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
@@ -106,6 +106,9 @@ public class Global : MonoBehaviour {
 		AudioPlay (powerDown);
 	}
 
+	public void StageClearAudio() {
+		AudioPlay (stageClear);
+	}
 //	public void WarpToMap(Transform target, Transform returnLocation) {
 //		StartCoroutine (Warp (1f, target, returnLocation));
 //		// SceneManager.LoadScene (mapName);

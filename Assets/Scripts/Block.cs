@@ -22,9 +22,11 @@ public class Block : MonoBehaviour {
 		colliders = GetComponents<Collider2D> ();
 	}
 
-//	void OnCollisionEnter2D(Collision2D c) {
-		
-//	}
+	void OnTriggerEnter2D(Collider2D c) {
+		if (c.gameObject.layer == LayerMask.NameToLayer("Fireball")) {
+			Destroy (c.gameObject);
+		}
+	}
 
 	public virtual void Hit() {
 		if (!MarioController.instance.super) {

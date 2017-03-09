@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 415e4a91185d9b848ac010bd6cd3bea6
-timeCreated: 1488851103
+timeCreated: 1489035969
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,10 @@ TextureImporter:
     21300012: pipe_junction_left
     21300014: pipe_junction_body
     21300016: castle_s_brown_right
+    21300018: fireball_0
+    21300020: fireball_1
+    21300022: fireball_2
+    21300024: fireball_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -190,6 +194,58 @@ TextureImporter:
         y: 954
         width: 32
         height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball_0
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 299
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball_1
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 299
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball_2
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 299
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball_3
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 299
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

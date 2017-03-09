@@ -22,12 +22,14 @@ public class Flag : MonoBehaviour {
 		if (c.tag == "Player") {
 			Global.instance.mario.Flag ();
 			Global.instance.win = true;
+			MainCamera.instance.Audio (false);
 			StartCoroutine (StartSlideDownFlag (0.5f));
 		}
 	}
 
 	void SlideDownFlag() {
-		if (slide && MarioController.instance.transform.position.y > flagBase.position.y + 0.5f) {
+		float ydel = MarioController.instance.super ? 0.75f : 0.5f;
+		if (slide && MarioController.instance.transform.position.y > flagBase.position.y + ydel) {
 			MarioController.instance.transform.Translate (Vector2.down * Time.deltaTime * 3f);
 		}
 		/*if (slide && flag.position.y > flagBase.position.y + 0.5f) {
@@ -40,6 +42,14 @@ public class Flag : MonoBehaviour {
 	IEnumerator StartSlideDownFlag(float t) {
 		yield return new WaitForSeconds(t);
 		slide = true;
+		GetComponent<AudioSource> ().Play ();
 		flag.GetComponent<Animator> ().SetTrigger ("drop");
+		StartCoroutine (WaitForStageClear (1.5f));
+	}
+
+	IEnumerator WaitForStageClear(float t) {
+		yield return new WaitForSeconds(t);
+		Global.instance.StageClearAudio ();
+		UI.instance.WinText ();
 	}
 }
