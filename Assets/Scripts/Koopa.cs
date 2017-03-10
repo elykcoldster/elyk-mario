@@ -100,11 +100,26 @@ public class Koopa : Enemy {
 		if (c.transform.tag == "Wall") {
 			dir.x = -dir.x;
 			rb.velocity = dir;
+			print (dir.x);
 			if (dir.x > 0f) {
 				sr.flipX = true;
 			} else {
 				sr.flipX = false;
 			}
 		}
+	}
+
+	public void Revive() {
+		transform.position = startingPosition;
+		transform.rotation = Quaternion.identity;
+
+		dead = false;
+		anim.SetBool ("death", false);
+
+		GetComponent<SpriteRenderer> ().enabled = true;
+		GetComponent<Collider2D> ().enabled = true;
+
+		rb.velocity = Vector2.zero;
+		rb.angularVelocity = 0f;
 	}
 }

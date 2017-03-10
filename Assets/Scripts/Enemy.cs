@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c) {
 		int layerMask = 1 << LayerMask.NameToLayer ("Player");
 		if (c.transform.tag == "Player" && !Global.instance.death) {
-			if (Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.51f, 0.1f), 0f, layerMask)) {
+			if (Physics2D.OverlapBox (bumpCheck.position, new Vector2 (0.51f, 0.5f), 0f, layerMask)) {
 				if (Global.instance.mario.starPower) {
 					Death (false);
 				} else {

@@ -213,8 +213,10 @@ public class MarioController : MonoBehaviour {
 		anim.SetBool ("super", super);
 		if (super) {
 			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 1.0f);
+			transform.position += 0.25f * Vector3.up;
 		} else {
 			GetComponent<BoxCollider2D> ().size = new Vector2 (width, 0.5f);
+			transform.position -= 0.25f * Vector3.up;
 		}
 		height = GetComponent<BoxCollider2D>().size.y;
 
